@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>View Swimming Activities</title>
+  <link rel="stylesheet" href="/css/adminStyles.css">
+</head>
+<body>
+   <nav class="navbar">
+    <div class="nav-brand">🏊 Swimminng Pool</div>
+    <ul class="nav-links">
+      <li><a href="/admin/dashboard">Dashboard</a></li>
+      <li><a href="/admin/view-swimming">View Activities</a></li>
+      <li><a href="/admin/pool-bookings" class="active">Pool Bookings</a></li>
+      <li><a href="/logout">Logout</a></li>
+    </ul>
+  </nav>
+
+  <main class="container">
+    <h1>Swimming Activities</h1>
+
+    <% if (activities.length > 0) { %>
+      <table class="activities-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Coach</th>
+            <th>Price</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% activities.forEach(activity => { %>
+            <tr>
+              <td><%= activity.name %></td>
+              <td><%= activity.coach %></td>
+              <td>Nu. <%= activity.price %></td>
+              <td>
+                <a href="/admin/edit-activity/<%= activity.id %>" class="btn edit-btn">Edit</a>
+                <form action="/admin/delete-activity/<%= activity.id %>" method="POST" style="display:inline;">
+                  <button type="submit" class="btn delete-btn" onclick="return confirm('Are you sure?')">Delete</button>
+                </form>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    <% } else { %>
+      <p>No activities available.</p>
+    <% } %>
+  </main>
+</body>
+</html>
