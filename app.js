@@ -5,6 +5,7 @@ require('dotenv').config();
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 const adminRoutes = require('./routes/adminRoutes');
+const createAllTables = require('./models/createTables');
 
 const app = express();
 app.set('view engine', 'ejs');
@@ -17,7 +18,8 @@ app.use('/user', userRoutes);
 app.use('/admin', adminRoutes);
 
 app.get('/', (req, res) => res.render('pages/landing'));
-
+// Call table creation at server startup (use with caution in production)
+createAllTables();
 
 app.listen(process.env.PORT, () =>
   console.log(`Server running on http://localhost:${process.env.PORT}`)
