@@ -28,7 +28,7 @@ module.exports = {
 
   viewBookings: async (req, res) => {
     const bookings = await bookingModel.getAll(); // Fetch all bookings
-    res.render('admin/pool-Bookings', { bookings });
+    res.render('admin/pool-bookings', { bookings });
   },
 
   updateBookingStatus: async (req, res) => {
